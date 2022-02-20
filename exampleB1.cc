@@ -2,6 +2,7 @@
 #include "ActionInitialization.hh"
 
 #include "G4RunManagerFactory.hh"
+#include "DetectorConstruction.hh"
 #include "G4SteppingVerbose.hh"
 #include "G4UImanager.hh"
 #include "QBBC.hh"
@@ -35,7 +36,9 @@ int main(int argc,char** argv)
   // Set mandatory initialization classes
   //
   // Detector construction
-  runManager->SetUserInitialization(new DetectorConstruction());
+  //set mandatory initialization classes
+  DetectorConstruction* det = new DetectorConstruction;
+  runManager->SetUserInitialization(det);
 
   // Physics list
   G4VModularPhysicsList* physicsList = new QBBC;
