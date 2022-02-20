@@ -5,9 +5,11 @@
 
 #include "G4SDManager.hh"
 #include "HeavyWaterSD.hh"
+#include "TrackerSD.hh"
 
 #include "G4Box.hh"
 #include "G4EllipticalTube.hh"
+#include "G4Sphere.hh"
 
 #include "G4VisAttributes.hh"
 
@@ -90,7 +92,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 	DefineMaterials();	
 
 	// Get nist material manager
-	G4NistManager* nist = G4NistManager::Instance();
+	//G4NistManager* nist = G4NistManager::Instance();
 	
 	// Envelope parameters
 	//
@@ -147,6 +149,36 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 	                  checkOverlaps);          //overlaps checking
 
 	//
+    //Tracker
+    //
+    G4double Trac_RMax = 1.00001*m;
+    G4double Trac_RMin = 1.00000*m;
+    G4double Trac_SPhi = 0.*deg;
+    G4double Trac_STheta = 0.*deg;
+    G4double Trac_DPhi = 360.*deg;
+    G4double Trac_DTheta = 360.*deg;
+
+    G4ThreeVector tracker_pos = G4ThreeVector(0.*mm, 150.*mm, -4.6*mm);
+
+    G4Sphere* TrackerS =
+        new G4Sphere("Tracker",
+        Trac_RMin, Trac_RMax, Trac_SPhi, Trac_DPhi, Trac_STheta, Trac_DTheta);
+
+    G4LogicalVolume* TrackerLV =
+        new G4LogicalVolume(TrackerS,	          //its solid
+                            Galactic,             //its material
+                            "Tracker");           //its name
+
+          new G4PVPlacement(0,                    //no rotation
+              				tracker_pos,
+                            TrackerLV,	          //its logical volume
+                            "Tracker",            //its name
+                            logicEnv,  		      //its mather volume
+                            false,                //no boolean operation
+                            0,                    //copy number
+                            checkOverlaps);       //overlaps checking
+
+	//
     //Heavy Water
     //
 
@@ -191,5 +223,10 @@ void DetectorConstruction::ConstructSDandField()
         = new HeavyWaterSD("NeutronGenerator/HeavyWaterSD", "HeavyWaterHitsCollection");
     G4SDManager::GetSDMpointer()->AddNewDetector(heavyWaterSD);
     SetSensitiveDetector("HeavyWater", heavyWaterSD);
+
+	auto trackerSD
+        = new TrackerSD("NeutronGenerator/TrackerSD", "TrackerHitsCollection");
+    G4SDManager::GetSDMpointer()->AddNewDetector(trackerSD);
+    SetSensitiveDetector("Tracker", trackerSD);
 }
 }

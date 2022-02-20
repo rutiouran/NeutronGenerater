@@ -18,20 +18,37 @@ namespace B1
 
 RunAction::RunAction()
 {
-	//Create analysis manager
+	// Create analysis manager
 	auto analysisManager = G4AnalysisManager::Instance();
 	G4cout << "Using" << analysisManager->GetType() << G4endl;
 
-	//Create directories
+	// Create directories
 	analysisManager->SetVerboseLevel(1);
+
+	// merge the ntuple each threads
+	analysisManager->SetNtupleMerging(true);
 
 	// Book histograms, ntuples
 	//
 
-	//Ntuple
+	// Ntuple
 	analysisManager->CreateNtuple("HeavyWaterTarget", "HeavyWaterTarget");
     analysisManager->CreateNtupleDColumn("Edep");
     analysisManager->CreateNtupleDColumn("TrackLength");
+    analysisManager->FinishNtuple();
+
+	analysisManager->CreateNtuple("Neutron", "Neutron");
+    analysisManager->CreateNtupleDColumn("neutronEnergy");
+    analysisManager->CreateNtupleDColumn("neutronfluxx");
+    analysisManager->CreateNtupleDColumn("neutronfluxy");
+    analysisManager->CreateNtupleDColumn("neutronfluxz");
+    analysisManager->FinishNtuple();
+
+    analysisManager->CreateNtuple("Gamma", "Gamma");
+    analysisManager->CreateNtupleDColumn("gammaEnergy");
+    analysisManager->CreateNtupleDColumn("gammafluxx");
+    analysisManager->CreateNtupleDColumn("gammafluxy");
+    analysisManager->CreateNtupleDColumn("gammafluxz");
     analysisManager->FinishNtuple();
 }
 

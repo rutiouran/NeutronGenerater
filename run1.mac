@@ -17,4 +17,6 @@
 /gun/particle deuteron
 /gun/energy 13 MeV
 #
-/run/beamOn 5
+/run/printProgress 1000000
+#
+/run/beamOn 100000
