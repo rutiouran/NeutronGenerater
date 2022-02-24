@@ -4,6 +4,7 @@
 #include "G4UserRunAction.hh"
 #include "G4Accumulable.hh"
 #include "globals.hh"
+#include "G4VProcess.hh"
 
 #include "DetectorConstruction.hh"
 #include "PrimaryGeneratorAction.hh"
@@ -12,6 +13,7 @@ class G4Run;
 
 class DetectorConstruction;
 class PrimaryGeneratorAction;
+class HistoManager;
 
 namespace B6
 {
@@ -28,15 +30,9 @@ class RunAction : public G4UserRunAction
 private:
     DetectorConstruction*      fDetector;
     PrimaryGeneratorAction*    fPrimary;
-
-//    void AddEdep (G4double edep);
-//
-//  private:
-//    G4Accumulable<G4double> fEdep = 0.;
-//    G4Accumulable<G4double> fEdep2 = 0.;
+	HistoManager*              fHistoManager;
 };
 
 }
 
 #endif
-

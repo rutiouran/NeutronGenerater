@@ -1,6 +1,7 @@
 #include "RunAction.hh"
 #include "PrimaryGeneratorAction.hh"
 #include "DetectorConstruction.hh"
+#include "HistoManager.hh"
 // #include "Run.hh"
 
 #include "G4RunManager.hh"
@@ -11,76 +12,40 @@
 #include "G4UnitsTable.hh"
 #include "G4SystemOfUnits.hh"
 
-#include "G4AnalysisManager.hh"
-
 namespace B6
 {
 
 RunAction::RunAction(DetectorConstruction* det, PrimaryGeneratorAction* prim)
 :G4UserRunAction(),
- fDetector(det), fPrimary(prim)
+ fDetector(det), fPrimary(prim), fHistoManager(0)
 {
-	// Create analysis manager
-	auto analysisManager = G4AnalysisManager::Instance();
-	G4cout << "Using" << analysisManager->GetType() << G4endl;
-
-	// Create directories
-	analysisManager->SetVerboseLevel(1);
-
-	// merge the ntuple each threads
-	analysisManager->SetNtupleMerging(true);
-
-	// Book histograms, ntuples
-	//
-
-	// Ntuple
-	analysisManager->CreateNtuple("HeavyWaterTarget", "HeavyWaterTarget");
-    analysisManager->CreateNtupleDColumn("Edep");
-    analysisManager->CreateNtupleDColumn("TrackLength");
-    analysisManager->FinishNtuple();
-
-	analysisManager->CreateNtuple("Neutron", "Neutron");
-    analysisManager->CreateNtupleDColumn("neutronEnergy");
-    analysisManager->CreateNtupleDColumn("neutronfluxx");
-    analysisManager->CreateNtupleDColumn("neutronfluxy");
-    analysisManager->CreateNtupleDColumn("neutronfluxz");
-    analysisManager->FinishNtuple();
-
-    analysisManager->CreateNtuple("Gamma", "Gamma");
-    analysisManager->CreateNtupleDColumn("gammaEnergy");
-    analysisManager->CreateNtupleDColumn("gammafluxx");
-    analysisManager->CreateNtupleDColumn("gammafluxy");
-    analysisManager->CreateNtupleDColumn("gammafluxz");
-    analysisManager->FinishNtuple();
+	fHistoManager = new HistoManager();
 }
 
 RunAction::~RunAction()
-{}
+{
+	delete fHistoManager;
+}
 
 void RunAction::BeginOfRunAction(const G4Run*)
 {
-	//inform the runManager to save random number seed
-	//G4RunManager::GetRunManager()->SetRandomNumberStore(true);
-	
-	// Get analysis manager
-	auto analysisManager = G4AnalysisManager::Instance();
-	
-	// Open an output file
+	//histograms
 	//
-	G4String fileName = "output.root";
-	// Other supported output types:
-	// G4String fileName = "B4.csv";
-	// G4String fileName = "B4.hdf5";
-	// G4String fileName = "B4.xml";
-	analysisManager->OpenFile(fileName);
-	G4cout << "Using " << analysisManager->GetType() << G4endl;
+	G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
+	analysisManager->OpenFile();
+
+//	//inform the runManager to save random number seed
+//	auto analysisManager = G4AnalysisManager::Instance();
 }
 
 void RunAction::EndOfRunAction(const G4Run* run)
 {
-	auto analysisManager = G4AnalysisManager::Instance();
-
+	//save histograms      
+	G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
 	analysisManager->Write();
 	analysisManager->CloseFile();
+	
+	// show Rndm status
+	//if (isMaster) G4Random::showEngineStatus();
 }
 }
