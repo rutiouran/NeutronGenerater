@@ -1,4 +1,5 @@
 #include "PrimaryGeneratorAction.hh"
+#include "DetectorConstruction.hh"
 
 #include "G4LogicalVolumeStore.hh"
 #include "G4LogicalVolume.hh"
@@ -10,10 +11,12 @@
 #include "G4SystemOfUnits.hh"
 #include "Randomize.hh"
 
-namespace B1
+namespace B6
 {
 
-PrimaryGeneratorAction::PrimaryGeneratorAction()
+PrimaryGeneratorAction::PrimaryGeneratorAction(DetectorConstruction* det)
+:G4VUserPrimaryGeneratorAction(),
+ fParticleGun(0), fDetector(det)
 {
   G4int n_particle = 1;
   fParticleGun  = new G4ParticleGun(n_particle);

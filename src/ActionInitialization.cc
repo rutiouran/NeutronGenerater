@@ -4,7 +4,7 @@
 #include "EventAction.hh"
 #include "SteppingAction.hh"
 
-namespace B1
+namespace B6
 {
 
 ActionInitialization::ActionInitialization(DetectorConstruction* detector)
@@ -17,7 +17,7 @@ ActionInitialization::~ActionInitialization()
 
 void ActionInitialization::BuildForMaster() const
 {
-  RunAction* runAction = new RunAction(fDectector, 0);
+  RunAction* runAction = new RunAction(fDetector, 0);
   SetUserAction(runAction);
 }
 
@@ -29,10 +29,10 @@ void ActionInitialization::Build() const
 	RunAction* runAction = new RunAction(fDetector, primary );
 	SetUserAction(runAction);
 
-	EventAction* eventAction = new EventAction();
+	EventAction* eventAction = new EventAction(runAction);
 	SetUserAction(eventAction);
 	
-	SteppingAction* steppingAction = new SteppingAction();
+	SteppingAction* steppingAction = new SteppingAction(eventAction);
 	SetUserAction(steppingAction);
 }
 

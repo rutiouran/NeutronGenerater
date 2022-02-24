@@ -1,13 +1,14 @@
-#ifndef B1ActionInitialization_h
-#define B1ActionInitialization_h 1
+#ifndef ActionInitialization_h
+#define ActionInitialization_h 1
 
 #include "G4VUserActionInitialization.hh"
+#include "DetectorConstruction.hh"
 
 /// Action initialization class.
 
-class DetectorConstruction;
+//class DetectorConstruction;
 
-namespace B1
+namespace B6
 {
 
 class ActionInitialization : public G4VUserActionInitialization

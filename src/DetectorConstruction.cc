@@ -17,7 +17,7 @@
 #include "G4PVPlacement.hh"
 #include "G4SystemOfUnits.hh"
 
-namespace B1
+namespace B6
 {
 
 DetectorConstruction::DetectorConstruction()

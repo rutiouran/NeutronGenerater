@@ -11,7 +11,7 @@
 #include "G4UnitsTable.hh"
 #include "G4AnalysisManager.hh"
 
-namespace B1
+namespace B6
 {
 
 EventAction::EventAction(RunAction* runAction)

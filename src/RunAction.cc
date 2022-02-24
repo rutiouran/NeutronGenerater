@@ -13,10 +13,12 @@
 
 #include "G4AnalysisManager.hh"
 
-namespace B1
+namespace B6
 {
 
-RunAction::RunAction()
+RunAction::RunAction(DetectorConstruction* det, PrimaryGeneratorAction* prim)
+:G4UserRunAction(),
+ fDetector(det), fPrimary(prim)
 {
 	// Create analysis manager
 	auto analysisManager = G4AnalysisManager::Instance();

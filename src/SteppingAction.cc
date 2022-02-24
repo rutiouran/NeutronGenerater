@@ -7,7 +7,7 @@
 #include "G4RunManager.hh"
 #include "G4LogicalVolume.hh"
 
-namespace B1
+namespace B6
 {
 
 SteppingAction::SteppingAction(EventAction* eventAction)
