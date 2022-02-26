@@ -2,21 +2,20 @@
 #define RunAction_h 1
 
 #include "G4UserRunAction.hh"
-#include "G4Accumulable.hh"
 #include "globals.hh"
 #include "G4VProcess.hh"
 
-#include "DetectorConstruction.hh"
-#include "PrimaryGeneratorAction.hh"
-
-class G4Run;
+//#include "DetectorConstruction.hh"
+//#include "PrimaryGeneratorAction.hh"
+//#include "Run.hh"
+//#include "G4Run.hh"
+#include <map>
 
 class DetectorConstruction;
 class PrimaryGeneratorAction;
+class Run;
 class HistoManager;
-
-namespace B6
-{
+class G4Run;
 
 class RunAction : public G4UserRunAction
 {
@@ -27,12 +26,16 @@ class RunAction : public G4UserRunAction
     void BeginOfRunAction(const G4Run*) override;
     void   EndOfRunAction(const G4Run*) override;
 
+	virtual G4Run* GenerateRun();
+	void SetPrintFlag(G4bool);
+
 private:
     DetectorConstruction*      fDetector;
     PrimaryGeneratorAction*    fPrimary;
 	HistoManager*              fHistoManager;
-};
+	Run*					   fRun;
 
-}
+	G4bool   fPrint;      //optional printing
+};
 
 #endif

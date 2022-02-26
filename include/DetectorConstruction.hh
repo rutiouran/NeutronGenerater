@@ -10,9 +10,6 @@ class G4LogicalVolume;
 
 /// Detector construction class to define materials and geometry.
 
-namespace B6
-{
-
 class DetectorConstruction : public G4VUserDetectorConstruction
 {
   public:
@@ -21,6 +18,11 @@ class DetectorConstruction : public G4VUserDetectorConstruction
 
     G4VPhysicalVolume* Construct() override;
 	virtual void ConstructSDandField();
+
+    void SetMaterial (G4String);
+    G4Material* GetMaterial() {return fMaterial;};
+
+	
 
 private:
 	void DefineMaterials(); // Define Materials
@@ -35,10 +37,11 @@ private:
 	G4Material* Polythelene;
 	G4Material* BoronCantainingPolythelene;
 
-  protected:
-    G4LogicalVolume* fScoringVolume = nullptr;
-};
+private:
+	G4Material* fMaterial;
 
-}
+//protected:
+    //G4LogicalVolume* fScoringVolume = nullptr;
+};
 
 #endif

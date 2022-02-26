@@ -5,12 +5,10 @@
 #include "globals.hh"
 
 class G4LogicalVolume;
+class G4ParticleDefinition;
 
 /// Stepping action class
 ///
-
-namespace B6
-{
 
 class EventAction;
 
@@ -25,9 +23,8 @@ class SteppingAction : public G4UserSteppingAction
 
   private:
     EventAction* fEventAction = nullptr;
-    G4LogicalVolume* fScoringVolume = nullptr;
-};
 
-}
+	std::map<G4ParticleDefinition*, G4int> fParticleFlag;
+};
 
 #endif

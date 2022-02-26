@@ -11,9 +11,6 @@
 #include "G4SystemOfUnits.hh"
 #include "Randomize.hh"
 
-namespace B6
-{
-
 PrimaryGeneratorAction::PrimaryGeneratorAction(DetectorConstruction* det)
 :G4VUserPrimaryGeneratorAction(),
  fParticleGun(0), fDetector(det)
@@ -77,6 +74,4 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   fParticleGun->SetParticlePosition(G4ThreeVector(0.0*mm, 150.0*mm, -500.0*mm));
 
   fParticleGun->GeneratePrimaryVertex(anEvent);
-}
-
 }

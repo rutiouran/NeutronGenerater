@@ -11,9 +11,6 @@
 #include "G4UnitsTable.hh"
 #include "G4AnalysisManager.hh"
 
-namespace B6
-{
-
 EventAction::EventAction(RunAction* runAction)
 : fRunAction(runAction),
   fheavywaterHCID(-1)
@@ -62,5 +59,4 @@ void EventAction::EndOfEventAction(const G4Event* event)
 	analysisManager->FillNtupleDColumn(0, 0, (*heavywaterHC)[0]->GetEdep());
 	analysisManager->FillNtupleDColumn(0, 1, (*heavywaterHC)[0]->GetTrackLength());
 	analysisManager->AddNtupleRow(0);
-}
 }

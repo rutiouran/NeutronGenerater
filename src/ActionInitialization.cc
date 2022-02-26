@@ -4,9 +4,6 @@
 #include "EventAction.hh"
 #include "SteppingAction.hh"
 
-namespace B6
-{
-
 ActionInitialization::ActionInitialization(DetectorConstruction* detector)
  : G4VUserActionInitialization(),
    fDetector(detector)
@@ -34,6 +31,4 @@ void ActionInitialization::Build() const
 	
 	SteppingAction* steppingAction = new SteppingAction(eventAction);
 	SetUserAction(steppingAction);
-}
-
 }

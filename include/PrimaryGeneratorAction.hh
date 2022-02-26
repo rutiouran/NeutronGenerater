@@ -10,10 +10,7 @@ class G4ParticleGun;
 class G4Event;
 class G4Box;
 
-class DetectorConstruction;
-
-namespace B6
-{
+//class DetectorConstruction;
 
 class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 {
@@ -33,7 +30,5 @@ class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 
 	DetectorConstruction* fDetector;
 };
-
-}
 
 #endif

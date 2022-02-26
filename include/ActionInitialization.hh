@@ -6,11 +6,6 @@
 
 /// Action initialization class.
 
-//class DetectorConstruction;
-
-namespace B6
-{
-
 class ActionInitialization : public G4VUserActionInitialization
 {
   public:
@@ -23,7 +18,5 @@ class ActionInitialization : public G4VUserActionInitialization
 private:
     DetectorConstruction* fDetector;
 };
-
-}
 
 #endif

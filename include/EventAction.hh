@@ -9,8 +9,6 @@
 /// Event action class
 ///
 
-namespace B6
-{
 
 class RunAction;
 
@@ -31,7 +29,5 @@ private:
 private:
     RunAction* fRunAction = nullptr;
 };
-
-}
 
 #endif
