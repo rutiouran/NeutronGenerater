@@ -35,29 +35,28 @@ void HeavyWaterSD::Initialize(G4HCofThisEvent* hce)
 G4bool HeavyWaterSD::ProcessHits(G4Step* step, 
                                      G4TouchableHistory*)
 {  
-  //Energy deposit
-  auto edep = step->GetTotalEnergyDeposit();
- 
-  //Step length
-  G4double stepLength = 0.;
-  //if( step->GetTrack()->GetDefinition()->GetPDGCharge() != 0)
-    stepLength = step->GetStepLength();
+	//Energy deposit
+	auto edep = step->GetTotalEnergyDeposit();
+	
+	//Step length
+	G4double stepLength = step->GetStepLength();
+	
+	//if(edep == 0. && stepLength == 0.) return false;
+	
+	G4int layerNumber = step->GetPreStepPoint()->GetTouchableHandle()->GetCopyNumber();
+	auto hit = (*fHitsCollection)[layerNumber];
+	if(!hit)
+	{
+	  G4ExceptionDescription msg;
+	  msg << "Cannot access hit " << "0";
+	  G4Exception("B4cCalorimeterSD::ProcessHits()",
+	    "MyCode0004", FatalException, msg);
+	}
 
-  if(edep == 0. && stepLength == 0.) return false;
+	if(edep != 0. && stepLength != 0. && step->GetTrack()->GetTrackID() == 1)
+	hit->Add(edep, stepLength);
 
-  G4int layerNumber = step->GetPreStepPoint()->GetTouchableHandle()->GetCopyNumber();
-  auto hit = (*fHitsCollection)[layerNumber];
-  if(!hit)
-  {
-    G4ExceptionDescription msg;
-    msg << "Cannot access hit " << "0";
-    G4Exception("B4cCalorimeterSD::ProcessHits()",
-      "MyCode0004", FatalException, msg);
-  }
-
-  hit->Add(edep, stepLength);
-
-  return true;
+	return true;
 
   //Fill histograms and ntuple
 //  auto analysisManager = G4AnalysisManager::Instance();

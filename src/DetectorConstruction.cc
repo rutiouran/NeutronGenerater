@@ -16,6 +16,7 @@
 #include "G4LogicalVolume.hh"
 #include "G4PVPlacement.hh"
 #include "G4SystemOfUnits.hh"
+#include "G4UnitsTable.hh"
 
 DetectorConstruction::DetectorConstruction()
 :G4VUserDetectorConstruction(),
@@ -207,6 +208,10 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 						false,									//no boolean operation
 						0,										//copy numble
 						checkOverlaps);							//overlaps checking
+
+	G4cout << "The information of the volume : " << G4endl
+		   << "(1) Name : " << HeavyWaterLV->GetName() << G4endl
+		   << "(2) Mass : " << G4BestUnit(HeavyWaterLV->GetMass(), "Mass")  << G4endl << G4endl;
 
 	//
 	//Get Color
