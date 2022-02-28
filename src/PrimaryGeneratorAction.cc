@@ -25,7 +25,7 @@ PrimaryGeneratorAction::PrimaryGeneratorAction(DetectorConstruction* det)
     = particleTable->FindParticle(particleName="deuteron");
   fParticleGun->SetParticleDefinition(particle);
   fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,0.,1.));
-  fParticleGun->SetParticleEnergy(13.*MeV);
+  fParticleGun->SetParticleEnergy(2.*MeV); // cross section = 1.042460-1 B
 }
 
 PrimaryGeneratorAction::~PrimaryGeneratorAction()

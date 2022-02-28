@@ -87,11 +87,11 @@ void DetectorConstruction::DefineMaterials()
 	fMaterial = D2O;
 
 	//D2
-	//D2O = new G4Material("HeavyWater", 0.000167*g/cm3, ncomponents=1,
-    ////D2O = new G4Material("HeavyWater", 0.00018*g/cm3, ncomponents=1,
-    //                    kStateLiquid, 293.15*kelvin, 1*atmosphere);
-    //D2O->AddElement(D, natoms=2);
-	//fMaterial = D2O;
+//	D2O = new G4Material("HeavyWater", 0.000167*g/cm3, ncomponents=1,
+//    //D2O = new G4Material("HeavyWater", 0.00018*g/cm3, ncomponents=1,
+//                        kStateLiquid, 293.15*kelvin, 1*atmosphere);
+//    D2O->AddElement(D, natoms=1);
+//	fMaterial = D2O;
 
 	std::cout << *(G4Material::GetMaterialTable()) << std::endl;    //Get material table
 }
