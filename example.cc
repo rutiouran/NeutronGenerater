@@ -10,6 +10,7 @@
 #include "FTFP_BERT.hh"
 #include "PhysicsList.hh"
 #include "G4ParticleHPManager.hh"
+//#include "G4GenericBiasingPhysics.hh"
 
 #include "G4VisExecutive.hh"
 #include "G4UIExecutive.hh"
@@ -44,10 +45,7 @@ int main(int argc,char** argv)
 
   // Physics list
   G4VModularPhysicsList* physicsList = new PhysicsList;
-  //G4VModularPhysicsList* physicsList = new FTFP_BERT;
   physicsList->SetVerboseLevel(1);
-
-  runManager->SetUserInitialization(physicsList);
 
   // Replaced HP environmental variables with C++ calls
   G4ParticleHPManager::GetInstance()->SetSkipMissingIsotopes	( false );
@@ -57,6 +55,29 @@ int main(int argc,char** argv)
   G4ParticleHPManager::GetInstance()->SetProduceFissionFragments( false );
   G4ParticleHPManager::GetInstance()->SetUseWendtFissionModel	( false );
   G4ParticleHPManager::GetInstance()->SetUseNRESP71Model		( false );
+
+//  // -- and augment it with biasing facilities:
+//  G4GenericBiasingPhysics* biasingPhysics = new G4GenericBiasingPhysics();
+//  if ( true )
+//    {
+//      //biasingPhysics->Bias("gamma");
+//      //biasingPhysics->Bias("neutron");
+//      biasingPhysics->Bias("deuteron");
+//      //biasingPhysics->Bias("kaon0L");
+//      //biasingPhysics->Bias("kaon0S");
+//      physicsList->RegisterPhysics(biasingPhysics);
+//      G4cout << "      ********************************************************* " << G4endl;
+//      G4cout << "      ********** processes are wrapped for biasing ************ " << G4endl;
+//      G4cout << "      ********************************************************* " << G4endl;
+//    }
+//  else
+//    {
+//      G4cout << "      ************************************************* " << G4endl;
+//      G4cout << "      ********** processes are not wrapped ************ " << G4endl;
+//      G4cout << "      ************************************************* " << G4endl;
+//    }
+
+  runManager->SetUserInitialization(physicsList);
 
   // User action initialization
   runManager->SetUserInitialization(new ActionInitialization( det ));

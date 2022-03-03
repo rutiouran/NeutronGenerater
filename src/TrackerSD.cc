@@ -43,8 +43,13 @@ G4bool TrackerSD::ProcessHits(G4Step* step, G4TouchableHistory*)
 //  }
 
 	G4int pid = step->GetTrack()->GetParticleDefinition()->GetPDGEncoding();
-	//G4String particleName = step->GetTrack()->GetParticleDefinition()->GetParticleName();
+	G4String particleName = step->GetTrack()->GetParticleDefinition()->GetParticleName();
 	G4ThreeVector localPos = step->GetTrack()->GetPosition();
+
+//	if(particleName == "deuteron")
+//	{
+//		G4cout << "KineticEnergy = " << step->GetTrack()->GetKineticEnergy() << G4endl;
+//	}
 
 	// AnalysisManager
 	//

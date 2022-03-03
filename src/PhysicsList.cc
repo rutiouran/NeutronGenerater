@@ -35,7 +35,7 @@
 #include "G4IonConstructor.hh"
 #include "G4ShortLivedConstructor.hh"
 
-#include "G4EmExtraPhysics.hh"
+//#include "G4EmStandardPhysics.hh"
 
 PhysicsList::PhysicsList()
 :G4VModularPhysicsList()

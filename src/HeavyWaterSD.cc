@@ -40,7 +40,8 @@ G4bool HeavyWaterSD::ProcessHits(G4Step* step,
 	
 	//Step length
 	G4double stepLength = step->GetStepLength();
-	
+
+	//G4cout << "edep = " << edep << " , stepLength = " << stepLength << G4endl;
 	//if(edep == 0. && stepLength == 0.) return false;
 	
 	G4int layerNumber = step->GetPreStepPoint()->GetTouchableHandle()->GetCopyNumber();
